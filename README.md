@@ -9,7 +9,7 @@ Handerson Bezerra Medeiros
 Francleide Simão
 Maria Clara Pereira
 
-####iNTRODUÇÃO
+####INTRODUÇÃO
 
 ####O PROJETO
 
