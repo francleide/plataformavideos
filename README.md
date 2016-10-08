@@ -17,6 +17,6 @@ Maria Clara Pereira
 
 ######CASOS DE USO
 <img src="https://github.com/francleide/plataformavideos/blob/master/Caso_de_Uso.jpg" alt="Caso de Uso" />
-######DIAGRAMAS
+######OUTROS DIAGRAMAS
 
 ####CONCLUSÃO
