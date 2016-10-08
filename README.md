@@ -1,5 +1,5 @@
 # plataformavideos
-Plataforma de vídeos desktop em JavaFX
+Plataforma de vídeos desktop em JavaFX.<br>
 **Projeto desenvolvido por alunos do curso do Bachalado em Tecnologia da Informação da UFRN para a disciplina de Desenvolvimento para ambientes em desktop**
 
 ####PROFESSOR
