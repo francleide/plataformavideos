@@ -20,8 +20,7 @@ Maria Clara Pereira
 ######IMPLEMENTAÇÃO
 O sistema será desenvolvido na linguagem Java utilizando a biblioteca JavaFX.
 
-####REQUISITOS E FUNCIONALIDADES
-
+#####REQUISITOS E FUNCIONALIDADES
 Usuários | Descrição
 ---------|----------
 Cliente  |Pode visualizar os filmes, vídeos e séries cadastradas
@@ -40,7 +39,7 @@ Cadastrar série, temporada e epsódio | O administrador poderá cadastrar, edit
 Exibir detalhe do item | Quando o usuário clicar em um item irá aparecer as informações sobre ele como descrição, ano, ator e etc
 Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme ou série poderá assistir ao clicar em assistir e controlar a exibição do vídeo com os controles de play, pause, parar, recuar ou acelerar um video.
 
-<br>
+#####ENTREGAS
 >Sprint 1 - 12/10
 >Sprint 2 - 26/10
 
@@ -58,9 +57,10 @@ Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme o
   2      | Favoritar vídeos ou séries | Francleide
        
 <br>
+####DIAGRAMAS
 ######CASOS DE USO
 <img src="https://github.com/francleide/plataformavideos/blob/master/Caso_de_Uso_reformulado2.jpg" alt="Caso de Uso" />
 
-######OUTROS DIAGRAMAS
+######BANCO DE DADOS
 
 ####CONCLUSÃO
