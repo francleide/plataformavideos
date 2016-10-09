@@ -53,6 +53,7 @@ Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme o
 <br>
 ######CASOS DE USO
 <img src="https://github.com/francleide/plataformavideos/blob/master/Caso_de_Uso.jpg" alt="Caso de Uso" />
+
 ######OUTROS DIAGRAMAS
 
 ####CONCLUSÃO
