@@ -6,7 +6,7 @@ Plataforma de vídeos desktop em JavaFX.<br>
 Handerson Bezerra Medeiros
 
 ####ALUNOS
-Francleide Simão
+Francleide Simão e
 Maria Clara Pereira
 
 ####INTRODUÇÃO
