@@ -62,5 +62,5 @@ Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme o
 <img src="https://github.com/francleide/plataformavideos/blob/master/Caso_de_Uso_reformulado2.jpg" alt="Caso de Uso" />
 
 ######BANCO DE DADOS
-
+<img src="https://github.com/francleide/plataformavideos/blob/master/diagrama_BD.png" alt="Banco de dados" />
 ####CONCLUSÃO
