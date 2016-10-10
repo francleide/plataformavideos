@@ -40,7 +40,7 @@ Exibir detalhe do item | Quando o usuário clicar em um item irá aparecer as in
 Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme ou série poderá assistir ao clicar em assistir e controlar a exibição do vídeo com os controles de play, pause, parar, recuar ou acelerar um video.
 
 #####ENTREGAS
->Sprint 1 - 12/10
+>Sprint 1 - 12/10<br>
 >Sprint 2 - 26/10
 
  Sprints | Funcionalidade | Responsável
