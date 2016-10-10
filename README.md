@@ -9,16 +9,15 @@ Handerson Bezerra Medeiros
 Francleide Simão e
 Maria Clara Pereira
 
-
 ####O PROJETO
-<p>O projeto é uma plataforma de videos, séries e filmes. O sistema deve  listá-los e catalogados com as seguintes informações: Nome, descrição, ano, temporada, episódio, duração, categoria, diretor, ator principal, faixa etária,   
-</p><p>O usuário deve possuir uma conta para ter acesso a plataforma. Após logar, o usuário tem acesso aos filmes e séries recém cadastradas na plataforma e/ou antigos. Como atrativo da plataforma, ela deve disponibilizar formas para o usuário favoritar seus filmes e series, para assisti-los, revê-lo e também buscá-los.
-</p><p>Na busca, o usuário, pode pesquisar por: nome, Ator principal, em determinada categoria ou não. O sistema deve está ciente que não deve aparecer conteúdo que não seja adequado para a faixa etária do usuário. 
-</p><p> Quando escolher um conteúdo, o usuário terá acesso a informações mais detalhadas sobre o conteúdo, como: imagem, temporadas, descrição e etc. Ao selecionar o conteúdo para assistir, o usuário pode a qualquer momento pausar, tocar ou parar o vídeo. O usuário deve ver uma timeline do video e controlar seu volume. 
-</p><p>O Administrador, deve ter acesso ao cadastro de conteúdo, onde ele irá subir novos vídeos para a plataforma que ficarão disponíveis para os usuários, apenas os administradores terão acesso a essa função. 
+<p>O projeto é uma plataforma de videos, séries e filmes, onde devem ser listados e catalogados com as seguintes informações: Nome, descrição, ano, temporada, episódio, duração, categoria, diretor, ator principal, faixa etária,   
+</p><p>O usuário deve possuir uma conta para ter acesso a plataforma e aos filmes e séries recém cadastradas e/ou antigos. Um atrativo da plataforma é disponibilizar formas para o usuário favoritar seus filmes e series, para assisti-los, revê-los e também buscá-los.
+</p><p>Na busca pode-se pesquisar por: nome, Ator principal, em determinada categoria ou não. O sistema deve está ciente que não deve aparecer conteúdo que não seja adequado para a faixa etária do usuário. 
+</p><p> Escolhendo um conteúdo, o usuário terá acesso a informações mais detalhadas, como: imagem, temporadas, descrição e etc. Ao selecionar o conteúdo para assistir, o usuário pode a qualquer momento pausar, tocar ou parar o vídeo. O usuário deve ver uma timeline do video e controlar seu volume. 
+</p><p>O Administrador cadastrará o conteúdo que ficarão disponíveis para os usuários. 
 </p>
 ######IMPLEMENTAÇÃO
-O sistema será desenvolvido na linguagem Java utilizando a biblioteca JavaFX.
+As tecnologias utilizadas são Java 8 e PostgreSQL. As ferramentas complementares utilizadas são: IDE Eclipse, JavaFX, SceneBuilder e PgAdminIII. E para versionamento o Git e o repositório online GitHub.
 
 #####REQUISITOS E FUNCIONALIDADES
 Usuários | Descrição
@@ -46,15 +45,15 @@ Assistir filmes e epsódio | Quando o usuário visualizar os detalhes do filme o
  Sprints | Funcionalidade | Responsável
 ---------|----------------|------------
   1      | Efetuar login  |Francleide
-  1      | Criar conta de usuário | Francleide
+  1      | Criar conta de usuário |
   1      | Buscar vídeos ou série |
   1      | Listar vídeos |
   1      | Cadastrar vídeo |
-  2      | Cadastrar série, temporada e epsódio |Francleide
+  2      | Cadastrar série, temporada e epsódio |
   2      | Exibir detalhe do item |
   2      | Assistir filmes e epsódio |
-  2      | Listar favorito | Francleide
-  2      | Favoritar vídeos ou séries | Francleide
+  2      | Listar favorito | 
+  2      | Favoritar vídeos ou séries |
        
 <br>
 ####DIAGRAMAS
