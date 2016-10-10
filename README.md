@@ -14,8 +14,8 @@ Maria Clara Pereira
 <p>O projeto é uma plataforma de videos, séries e filmes. O sistema deve  listá-los e catalogados com as seguintes informações: Nome, descrição, ano, temporada, episódio, duração, categoria, diretor, ator principal, faixa etária,   
 </p><p>O usuário deve possuir uma conta para ter acesso a plataforma. Após logar, o usuário tem acesso aos filmes e séries recém cadastradas na plataforma e/ou antigos. Como atrativo da plataforma, ela deve disponibilizar formas para o usuário favoritar seus filmes e series, para assisti-los, revê-lo e também buscá-los.
 </p><p>Na busca, o usuário, pode pesquisar por: nome, Ator principal, em determinada categoria ou não. O sistema deve está ciente que não deve aparecer conteúdo que não seja adequado para a faixa etária do usuário. 
-</p><p> Quando escolher um conteúdo, o usuário tem acesso a informações mais detalhadas sobre o conteúdo, como: imagem, temporadas, descrição e etc. Ao selecionar o conteúdo para assistir, o usuário pode a qualquer momento pausar, tocar ou parar o vídeo. O usuário deve ver uma timeline do video e controlar seu volume. 
-</p><p>O Administrador, ao acessar a plataforma, deve ter acesso ao cadastro de conteúdo, onde ele irá subir novos vídeos para a plataforma que ficaram disponíveis para os usuários, apenas os administradores terão acesso a essa função. 
+</p><p> Quando escolher um conteúdo, o usuário terá acesso a informações mais detalhadas sobre o conteúdo, como: imagem, temporadas, descrição e etc. Ao selecionar o conteúdo para assistir, o usuário pode a qualquer momento pausar, tocar ou parar o vídeo. O usuário deve ver uma timeline do video e controlar seu volume. 
+</p><p>O Administrador, deve ter acesso ao cadastro de conteúdo, onde ele irá subir novos vídeos para a plataforma que ficarão disponíveis para os usuários, apenas os administradores terão acesso a essa função. 
 </p>
 ######IMPLEMENTAÇÃO
 O sistema será desenvolvido na linguagem Java utilizando a biblioteca JavaFX.
