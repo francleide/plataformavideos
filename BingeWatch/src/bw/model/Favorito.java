@@ -1,9 +1,11 @@
-package model;
+package bw.model;
 
-public class Assistido {
-	private int id;
-	private Item item;
-	public Assistido(int id,Item item){
+public class Favorito {
+	
+private int id;
+private Item item;
+
+	public Favorito(int id,Item item){
 		this.id=id;
 		this.item=item;
 	}
@@ -13,7 +15,7 @@ public class Assistido {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Item getItem() {
+	public Object getItem() {
 		return item;
 	}
 	public void setItem(Item item) {

@@ -1,4 +1,4 @@
-package model;
+package bw.model;
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -80,8 +80,6 @@ public class Usuario {
 		this.permissao = permissao;
 	}
 	
-
-
 
 	public Usuario (String login, String senha){
 		this.login = new SimpleStringProperty(login);
