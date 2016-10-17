@@ -72,7 +72,7 @@ public class MainApp extends Application {
 		launch(args);
 	}
 	
-	private void login(){
+	public void login(){
 		
 	}
 	

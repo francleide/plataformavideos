@@ -13,8 +13,8 @@ public class UsuarioController {
 	
 	//remove usuario
 	@FXML
-	private void deletarUsuario(){
-		int indexusuario= buscarUsuario();
+	private void deletarUsuario(Usuario usuario){
+		int indexusuario= buscarUsuario(usuario);
 		usuarios.remove(indexusuario);
 	}
 	//adiciona usuario 
@@ -26,13 +26,20 @@ public class UsuarioController {
 	//edita usuario 
 	@FXML
 	private void editarUsuario(Usuario usuario){
-		int indexusuario= buscarUsuario();
+		int indexusuario= buscarUsuario(usuario);
 		usuarios.set(indexusuario, usuario);
 		
 	}
 	
-	private int buscarUsuario(){
-		
-		return 0;
+	private int buscarUsuario(Usuario usuario){
+		int i;
+		for(i=0;i<usuarios.size();i++){
+			if(usuarios.get(i)==usuario){
+				return i;
+			}
+		}
+		return -1;
 	}
+	
+	
 }
