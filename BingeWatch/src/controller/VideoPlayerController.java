@@ -36,15 +36,25 @@ public class VideoPlayerController implements Initializable{
 	@FXML
 	private Label playTime;
 	
+	private static String path;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String path = selectMedia();		
 		media = new Media(new File(path).toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.setRate(1);
 		mediaView.setMediaPlayer(mediaPlayer);
-		mediaPlayer.play();
+		
 		volumeSlider.setValue(mediaPlayer.getVolume() * 100);
+		timeLine.setValue(mediaPlayer.getStartTime().toSeconds());
+		
+		initListeners();
+		setLayout();
+		
+		mediaPlayer.play();
+	}
+	
+	private void initListeners(){
 		volumeSlider.valueProperty().addListener(new InvalidationListener() {
 			
 			@Override
@@ -68,8 +78,6 @@ public class VideoPlayerController implements Initializable{
             }
         });
 		
-		//timeLine.setMax(mediaPlayer.getTotalDuration().toSeconds());
-		timeLine.setValue(mediaPlayer.getStartTime().toSeconds());
 		timeLine.valueProperty().addListener(new InvalidationListener() {
 			
 			@Override
@@ -81,8 +89,6 @@ public class VideoPlayerController implements Initializable{
 				
 			}
 		});
-		setLayout();
-		
 	}
 	
 	private String selectMedia(){
@@ -164,6 +170,12 @@ public class VideoPlayerController implements Initializable{
 		        }
 		    }
 	
+	public void fechar(ActionEvent event){
+		mediaPlayer.stop();
+		Stage stage = (Stage) volumeSlider.getScene().getWindow();
+	    stage.close();
+	}
+	
 	public void setLayout()
 	{
 		DoubleProperty width = mediaView.fitWidthProperty();
@@ -186,5 +198,13 @@ public class VideoPlayerController implements Initializable{
 	public void reload(ActionEvent event){
 		mediaPlayer.seek(mediaPlayer.getStartTime());
 		mediaPlayer.play();
+	}
+
+	public static String getPath() {
+		return path;
+	}
+
+	public static void setPath(String path) {
+		VideoPlayerController.path = path;
 	}
 }

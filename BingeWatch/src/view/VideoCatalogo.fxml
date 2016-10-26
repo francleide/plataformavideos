@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VideoCatalogoController">
    <content>
       <SplitPane dividerPositions="0.1725" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -37,7 +37,7 @@
                      </image>
                   </ImageView>
                   <TextField layoutX="154.0" layoutY="66.0" promptText="Buscar vídeo" />
-                  <Button fx:id="btnCadastrar" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" text="Cadastrar Conteúdo" />
+                  <Button fx:id="btnCadastrar" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onAction="#cadastrarVideoDialog" text="Cadastrar Conteúdo" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0">
@@ -52,10 +52,9 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TableView fx:id="tbVideos" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="75.0" text="C1" />
-                                                    <TableColumn prefWidth="75.0" text="C2" />
+                                                    <TableColumn fx:id="columnVideo" prefWidth="75.0" text="C1" />
                                                   </columns>
                                                 </TableView>
                                              </children>
