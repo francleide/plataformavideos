@@ -1,94 +1,116 @@
-package bw.model;
-import java.util.ArrayList;
+package model;
 
-import java.util.Date;
 import java.time.LocalDate;
-
-
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Usuario {
-	private StringProperty login;
-	private StringProperty senha;
-	private ObjectProperty<LocalDate> idade;
-	private boolean permissao;
-	private ObservableList<Favorito> favoritos;
-	private ObservableList<Assistido> assistidos;
+    @Id
+    private String login;
+    @Column
+    private String nome;
+    
+    @Column(nullable=false)
+    private String senha;
+    @Column(nullable=false)
+    private LocalDate idade;
+    @Column(nullable=false)
+    private String permissao;
+    @OneToMany(mappedBy="usuario")
+    private List<Favorito> favoritos;
+    @OneToMany(mappedBy="usuario")
+    private List<Assistido> assistidos;
 
-	public ObservableList<Favorito> getFavoritos() {
-		return favoritos;
-	}
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public ObservableList<Assistido> getAssistidos() {
-		return assistidos;
-	}
+    public String getLogin() {
+        return login;
+    }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-	public void setAssistidos(Assistido assistido,boolean play ) {
-		if(play == true)
-		this.assistidos.add(assistido);
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setFavoritos(Favorito favorito, boolean favoritado) {
-		if(favoritado==true){
-			this.favoritos.add(favorito);
-		}
-	
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public StringProperty getLogin() {
-		return login;
-	}
+    public LocalDate getIdade() {
+        return idade;
+    }
 
+    public void setIdade(LocalDate idade) {
+        this.idade = idade;
+    }
 
-	public void setLogin(StringProperty login) {
-		this.login = login;
-	}
+    public String getPermissao() {
+        return permissao;
+    }
 
+    public void setPermissao(String permissao) {
+        this.permissao = permissao;
+    }
 
-	public StringProperty getSenha() {
-		return senha;
-	}
+    public List<Favorito> getFavoritos() {
+        return favoritos;
+    }
 
+    public void setFavoritos(List<Favorito> favoritos) {
+        this.favoritos = favoritos;
+    }
 
-	public void setSenha(StringProperty senha) {
-		this.senha = senha;
-	}
+    public List<Assistido> getAssistidos() {
+        return assistidos;
+    }
 
-
-	public ObjectProperty<LocalDate> getIdade() {
-		return idade;
-	}
-
-
-	public void setIdade(ObjectProperty<LocalDate> idade) {
-		this.idade = idade;
-	}
-
-
-	public boolean isPermissao() {
-		return permissao;
-	}
-
-
-	public void setPermissao(boolean permissao) {
-		this.permissao = permissao;
-	}
-	
-
-	public Usuario (String login, String senha){
-		this.login = new SimpleStringProperty(login);
-		this.senha = new SimpleStringProperty(senha);
-		this.idade = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
-		this.permissao = false;
-	}
-	public Usuario (){
-		this(null, null);
-	}
+    public void setAssistidos(List<Assistido> assistidos) {
+        this.assistidos = assistidos;
+    }
+    public StringProperty getNomeProperty() {
+        return new SimpleStringProperty(this.getNome());
+    }
+    public StringProperty getLoginProperty() {
+        return new SimpleStringProperty(this.getLogin());
+    }
+    public StringProperty getPermissaoProperty() {
+        return new SimpleStringProperty(this.getPermissao());
+    }
+    public ObjectProperty<LocalDate> getLocalDate() {
+        return new SimpleObjectProperty<>(this.getIdade());
+    }
+    public Usuario (String nome, String login, String senha){
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;    
+        this.idade = LocalDate.now();
+        this.permissao = "user";
+    }
+    
+    public Usuario (){
+            this(null, null, null);
+    }
 
 }
