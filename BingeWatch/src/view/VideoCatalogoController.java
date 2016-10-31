@@ -10,14 +10,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -37,11 +41,17 @@ public class VideoCatalogoController extends Application{
 	private VBox detalhesBox;
 	
 	private ImageView logoBW;
+	private static ImageView previewImg;
 	
 	private Button btnCadastrar;
-	private Button btnReproduzir;
+	private static Button btnReproduzir;
+	private Button btnVerFavoritos;
+	private static Button btnAddFavoritos;
+	private Button btnAssistidos;
 	
-	private static Label titulo, ano, faixaEtaria;
+	private TextField fieldBusca;
+	
+	private static Label titulo, ano, faixaEtaria, labelUser;
 	
 	private ScrollPane scrollFilmes;
 	private static TilePane tileFilmes;
@@ -61,8 +71,17 @@ public class VideoCatalogoController extends Application{
 		
 		btnCadastrar = new Button("Cadastrar Conteúdo");
 		btnReproduzir = new Button("Reproduzir");
-		logoBW = new ImageView("images/logoBW.png");
+		btnAddFavoritos = new Button("Adicionar aos Favoritos");
+		btnVerFavoritos = new Button("Favoritos");
+		btnAssistidos = new Button("Assistidos");
 		
+		logoBW = new ImageView("images/logoBW.png");
+		previewImg = new ImageView();
+		
+		fieldBusca = new TextField();
+		fieldBusca.setPromptText("Buscar video cadastrado");
+		
+		labelUser = new Label("username");
 		titulo = new Label("");
 		ano = new Label("");
 		faixaEtaria = new Label("");
@@ -70,6 +89,9 @@ public class VideoCatalogoController extends Application{
 		detalhesBox = new VBox();
 		initListeners();
 		initLayout();
+		
+		btnAddFavoritos.setVisible(false);
+		btnReproduzir.setVisible(false);
 		
 		scrollFilmes.setContent(tileFilmes);
 		
@@ -80,7 +102,13 @@ public class VideoCatalogoController extends Application{
 		leftPane.setPrefWidth(600);
 		scrollFilmes.prefWidthProperty().bind(leftPane.widthProperty());
 		
-		detalhesBox.getChildren().addAll(titulo, ano, faixaEtaria, btnReproduzir);
+		detalhesBox.getChildren().addAll(previewImg, titulo, ano, faixaEtaria, btnReproduzir, btnAddFavoritos);
+		detalhesBox.setAlignment(Pos.CENTER);
+		detalhesBox.setPadding(new Insets(30,30,30,30));
+		//detalhesBox.setMargin(previewImg, new Insets(50, 50, 50, 50));
+		detalhesBox.setPrefWidth(200);
+		detalhesBox.prefWidthProperty().bind(rightPane.widthProperty());
+		
 		rightPane.getChildren().addAll(detalhesBox);
 		rightPane.setPrefWidth(200);
 		rightPane.setMinWidth(200);
@@ -88,9 +116,11 @@ public class VideoCatalogoController extends Application{
 		 upperPane = new AnchorPane();
 		 lowerPane = new AnchorPane();
 		
+		 
 		upperPane.setMinHeight(100);
 		upperPane.setMaxHeight(100);
-		upperPane.getChildren().addAll(logoBW, btnCadastrar);
+		//upperPane.getChildren().addAll(logoBW, btnCadastrar);
+		setCabecalhoLayout();
 		
 		upperPane.setMinWidth(800);
 		upperPane.setPrefWidth(800);
@@ -135,11 +165,64 @@ public class VideoCatalogoController extends Application{
 
 			@Override
 			public void handle(ActionEvent event) {
-				reproduzirVideo(selectedVideo.getPath());
+				if(selectedVideo != null)
+					reproduzirVideo(selectedVideo.getPath());
 				
 			}
 			
 		});
+		
+		btnAddFavoritos.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		btnVerFavoritos.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		btnAssistidos.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		fieldBusca.textProperty().addListener((observable, oldvalue, newvalue)->{
+			if (!fieldBusca.getText().equals("")){
+				tileFilmes.getChildren().clear();
+		        tileFilmes.getChildren().addAll(findVideo().keySet());
+			}
+			else{
+				tileFilmes.getChildren().clear();
+		        tileFilmes.getChildren().addAll(hashVideos.keySet());
+			}
+		});
+	}
+	
+	public HashMap<ImageView, Video> findVideo(){
+		HashMap<ImageView, Video> hashBusca = new HashMap<ImageView, Video>();
+		for (Video v: hashVideos.values()){
+			if (v.getTitulo().toLowerCase().contains(fieldBusca.getText().toLowerCase())){
+				hashBusca.put(v.getImagem(), v);
+			}
+		}
+		
+		return hashBusca;
 	}
 	
 	public void reproduzirVideo(String filePath){
@@ -161,6 +244,32 @@ public class VideoCatalogoController extends Application{
 
 	}
 	
+	public void setCabecalhoLayout(){
+		HBox hbox = new HBox();
+		VBox vbox = new VBox();
+		VBox vbox2 = new VBox();
+		
+		//LOGO
+		logoBW.setFitHeight(89);
+		logoBW.setFitWidth(134);
+		
+		vbox.getChildren().addAll(labelUser, btnVerFavoritos, btnAssistidos);
+		vbox2.getChildren().addAll(btnCadastrar, fieldBusca);
+		hbox.getChildren().addAll(logoBW, vbox2, vbox);
+		
+		hbox.setPadding(new Insets(15,15,15,15));
+		hbox.setMargin(vbox, new Insets(0,15,15,30));
+		hbox.setMargin(logoBW, new Insets(0,50,0,0));
+		//vbox2.setPadding(new Insets(30));
+		vbox2.setAlignment(Pos.CENTER);
+		vbox2.setMargin(btnCadastrar, new Insets(0, 20, 10, 20));
+		vbox.setPadding(new Insets(10,10,10,10));
+		vbox.setLayoutX(600);
+		
+		upperPane.getChildren().addAll(hbox);
+		
+	}
+	
 	public void initLayout(){
 		//SPLIT CABEÇALHO X CONTEÚDO
 		splitMain.setOrientation(Orientation.VERTICAL);
@@ -175,17 +284,8 @@ public class VideoCatalogoController extends Application{
 		splitCatalogo.setDividerPositions(0.759);
 		splitCatalogo.prefWidthProperty().bind(splitMain.widthProperty());
 		splitCatalogo.setPrefHeight(500);
-		//LOGO
-		logoBW.setFitHeight(89);
-		logoBW.setFitWidth(134);
-		logoBW.setLayoutX(10);
-		logoBW.setLayoutY(10);
-		
-		//Botão Cadastrar
-		btnCadastrar.setLayoutY(10);
-		btnReproduzir.setLayoutY(10);
-		btnReproduzir.setLayoutX(200);
-		
+
+
 		//SCROLL FILMES
 		scrollFilmes.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scrollFilmes.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
@@ -231,6 +331,9 @@ public class VideoCatalogoController extends Application{
 		titulo.setText(VideoCatalogoController.selectedVideo.getTitulo());
 		ano.setText(VideoCatalogoController.selectedVideo.getAno().toString());
 		faixaEtaria.setText(VideoCatalogoController.selectedVideo.getFaixaEtaria().toString());
+		previewImg.setImage(selectedVideo.getImagem().getImage());
+		btnAddFavoritos.setVisible(true);
+		btnReproduzir.setVisible(true);
 	}
 
 	public static Label getTitulo() {

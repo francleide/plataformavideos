@@ -8,7 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -60,10 +63,11 @@ public class CadastrarVideoController {
 		if (file != null){
 			try {
 				filePath = file.getAbsolutePath().toString();
-				videoPath.setText(filePath);
+				videoPath.setText(file.getName());
 				video = new Video(filePath);
 				video.setDuracaoSegundos(video.getMedia().getDuration().toSeconds());
 				video.setPath(file.getAbsolutePath().toString());
+				video.setImagem(imgPreview);
 				labelDuration.setText(video.getDuracaoFormatada());
 				
 			} catch (Exception e) {
@@ -74,22 +78,28 @@ public class CadastrarVideoController {
 	}
 	
 	public void selectImage(){
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Selecionar img");
-		fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("*.jpg", "*.png", "*.jpeg" ));
-		File file = fileChooser.showOpenDialog(new Stage());
-		if (file != null){
-			try {
-				imgPreview.setImage(new Image(new FileInputStream(file), 250, 0, true,
-	                    true));
-				imgPreview.setFitHeight(200);
-				imgPreview.setFitWidth(250);
-				video.setImagem(imgPreview);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if(video != null){
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Selecionar img");
+			fileChooser.getExtensionFilters().addAll(
+	                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.jpeg" ));
+			File file = fileChooser.showOpenDialog(new Stage());
+			if (file != null){
+				try {
+					imgPreview.setImage(new Image(new FileInputStream(file), 250, 0, true,
+		                    true));
+					imgPreview.setFitHeight(200);
+					imgPreview.setFitWidth(250);
+					video.setImagem(imgPreview);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+		}
+		else{
+			Alert alert = new Alert(AlertType.ERROR, "Selecione um vídeo primeiro!", ButtonType.CLOSE);
+			alert.show();
 		}
 	}
 	
@@ -102,16 +112,58 @@ public class CadastrarVideoController {
 	}
 	
 	public void confirmar(){
-		video.setTitulo(txtTitulo.getText());
-		video.setAno(Integer.parseInt(txtAno.getText()));
-		video.setCategoria(txtCategoria.getText());
-		video.setFaixaEtaria(Integer.parseInt(txtFaixaEtaria.getText()));
+		boolean temErro = hasInvalidFields();
+		if(!temErro){
+			video.setTitulo(txtTitulo.getText());
+			try{
+				video.setAno(Integer.parseInt(txtAno.getText()));
+				video.setFaixaEtaria(Integer.parseInt(txtFaixaEtaria.getText()));
+				video.setCategoria(txtCategoria.getText());
+				
+				video.getImagem().setOnMouseClicked(e->VideoCatalogoController.setSelectedVideo(video));
+				VideoCatalogoController.getHashVideos().put(video.getImagem(), video);
+		        VideoCatalogoController.updateCatalogo();
+		        Stage stage = (Stage) btnCadastrar.getScene().getWindow();
+			    stage.close();
+			}catch (NumberFormatException e){
+				Alert alert = new Alert(AlertType.ERROR, "Os campos 'Ano' e 'Faixa etária' devem ser números inteiros");
+				alert.show();
+			}
+		}
+	}
+	
+	public boolean hasInvalidFields(){
+		boolean error = false;
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.getButtonTypes().setAll(ButtonType.OK);
 		
-		video.getImagem().setOnMouseClicked(e->VideoCatalogoController.setSelectedVideo(video));
-		VideoCatalogoController.getHashVideos().put(video.getImagem(), video);
-        VideoCatalogoController.updateCatalogo();
-        Stage stage = (Stage) btnCadastrar.getScene().getWindow();
-	    stage.close();
+		if (txtTitulo.getText().isEmpty() || txtTitulo.getText().trim().equals("")){
+			alert.setContentText("Preencha o campo de título!");
+			error = true;
+		}
+			
+		else if (txtAno.getText().isEmpty() || txtTitulo.getText().trim().equals("")){
+			alert.setContentText("Preencha o ano!");
+			error = true;
+		}
+		else if (txtCategoria.getText().isEmpty() || txtTitulo.getText().trim().equals("")){
+			alert.setContentText("Preencha a categoria!");
+			error = true;
+		}
+		else if (txtFaixaEtaria.getText().isEmpty() || txtTitulo.getText().trim().equals("")){
+			alert.setContentText("Preencha a faixa etária!");
+			error = true;
+		}
+		else if(video.getImagem() == null){
+			alert.setContentText("Selecione uma imagem!");
+			error = true;
+		}
+		
+		if (error)
+			alert.show();
+		
+		return error;
+		
 	}
 		
 	public void getMediaInfo(){
