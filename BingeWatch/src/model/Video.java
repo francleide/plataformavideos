@@ -2,27 +2,25 @@ package model;
 
 import java.io.File;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 
 public class Video {
 	private Media media;
-	private StringProperty titulo;
+	private String titulo;
 	private String descricao;
 	private String path;
-	private int duracaoSegundos;
-	private int ano;
+	private double duracaoSegundos;
+	private Integer ano;
 	private String categoria;
-	private String faixaEtaria;
+	private Integer faixaEtaria;
 	private String diretor;
 	private ImageView imagem;
+	private String duracaoFormatada;
 	
-	public Video(String filePath, String titulo){
+	public Video(String filePath){
 		String path = new File(filePath).getAbsolutePath();
 		media = new Media(new File(path).toURI().toString());
-		this.titulo = new SimpleStringProperty(titulo);
 		imagem = new ImageView();
 	}
 	
@@ -33,13 +31,10 @@ public class Video {
 		this.media = media;
 	}
 	public String getTitulo() {
-		return titulo.get();
-	}
-	public StringProperty tituloProperty() {
 		return titulo;
 	}
 	public void setTitulo(String titulo) {
-		this.titulo.set(titulo);
+		this.titulo = titulo;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -47,13 +42,14 @@ public class Video {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public int getDuracaoSegundos() {
+	public double getDuracaoSegundos() {
 		return duracaoSegundos;
 	}
-	public void setDuracaoSegundos(int duracaoSegundos) {
+	public void setDuracaoSegundos(double duracaoSegundos) {
 		this.duracaoSegundos = duracaoSegundos;
+		setDuracaoFormatada(duracaoSegundos);
 	}
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 	public void setAno(int ano) {
@@ -65,10 +61,10 @@ public class Video {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	public String getFaixaEtaria() {
+	public Integer getFaixaEtaria() {
 		return faixaEtaria;
 	}
-	public void setFaixaEtaria(String faixaEtaria) {
+	public void setFaixaEtaria(int faixaEtaria) {
 		this.faixaEtaria = faixaEtaria;
 	}
 	public String getDiretor() {
@@ -92,5 +88,26 @@ public class Video {
 
 	public void setImagem(ImageView imagem) {
 		this.imagem = imagem;
+	}
+
+	public String getDuracaoFormatada() {
+		return duracaoFormatada;
+	}
+
+	public void setDuracaoFormatada(double duracao) {
+		Double horas ;
+		Double minutos;
+		Double segundos;
+		
+		horas = duracao / 60*60;
+		duracao -= (horas*60*60);
+		
+		minutos = duracao/60;
+		duracao -= minutos*60;
+		
+		segundos = duracao;
+		
+		duracaoFormatada = (horas.toString() + ":" + minutos.toString() + ":" + segundos.toString());
+		
 	}
 }

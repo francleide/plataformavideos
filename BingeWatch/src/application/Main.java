@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	//private ArrayList<Video> videosCadastrados;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

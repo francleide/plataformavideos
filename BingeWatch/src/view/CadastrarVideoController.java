@@ -1,6 +1,7 @@
 package view;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import controller.VideoPlayerController;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.stage.FileChooser;
@@ -32,8 +34,15 @@ public class CadastrarVideoController {
 	@FXML
 	private Button btnView;
 	
-	@FXML
-	private TextField videoPath;
+	@FXML private Button btnEscolherImagem;
+	
+	@FXML private ImageView imgPreview;
+	
+	@FXML private TextField videoPath;
+	@FXML private TextField txtTitulo;
+	@FXML private TextField txtAno;
+	@FXML private TextField txtCategoria;
+	@FXML private TextField txtFaixaEtaria;
 	
 	@FXML
 	private Label labelDuration; 
@@ -41,8 +50,6 @@ public class CadastrarVideoController {
 	private String filePath;
 	
 	private Video video;
-	
-	
 	
 	public void selectFile(){
 		FileChooser fileChooser = new FileChooser();
@@ -54,7 +61,11 @@ public class CadastrarVideoController {
 			try {
 				filePath = file.getAbsolutePath().toString();
 				videoPath.setText(filePath);
-				getMediaInfo();
+				video = new Video(filePath);
+				video.setDuracaoSegundos(video.getMedia().getDuration().toSeconds());
+				video.setPath(file.getAbsolutePath().toString());
+				labelDuration.setText(video.getDuracaoFormatada());
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -62,23 +73,23 @@ public class CadastrarVideoController {
 		}
 	}
 	
-	public void exibirVideo(){
-		try{
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VideoPlayer.fxml"));
-			VideoPlayerController.setPath(filePath);
-			Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Reproduzir Vídeo");
-            stage.setScene(new Scene(root1));  
-            Stage oldStage = (Stage) btnCancelar.getScene().getWindow();
-    	    oldStage.close();
-            
-            stage.show();
-            
-		} catch (Exception e) {
-			// TODO: handle exception
+	public void selectImage(){
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Selecionar img");
+		fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("*.jpg", "*.png", "*.jpeg" ));
+		File file = fileChooser.showOpenDialog(new Stage());
+		if (file != null){
+			try {
+				imgPreview.setImage(new Image(new FileInputStream(file), 250, 0, true,
+	                    true));
+				imgPreview.setFitHeight(200);
+				imgPreview.setFitWidth(250);
+				video.setImagem(imgPreview);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -91,15 +102,20 @@ public class CadastrarVideoController {
 	}
 	
 	public void confirmar(){
-		VideoCatalogoController.getVideosCadastrados().add(video);
-		VideoCatalogoController.getObservableListVideos().add(video);
-		Stage stage = (Stage) btnCancelar.getScene().getWindow();
+		video.setTitulo(txtTitulo.getText());
+		video.setAno(Integer.parseInt(txtAno.getText()));
+		video.setCategoria(txtCategoria.getText());
+		video.setFaixaEtaria(Integer.parseInt(txtFaixaEtaria.getText()));
+		
+		video.getImagem().setOnMouseClicked(e->VideoCatalogoController.setSelectedVideo(video));
+		VideoCatalogoController.getHashVideos().put(video.getImagem(), video);
+        VideoCatalogoController.updateCatalogo();
+        Stage stage = (Stage) btnCadastrar.getScene().getWindow();
 	    stage.close();
 	}
-	
+		
 	public void getMediaInfo(){
-		video = new Video(filePath, "Teste");
-		video.setImagem(new ImageView("images/logoBW.png"));
+		video = new Video(filePath);
 		//labelDuration.setText(video.getMedia().getDuration().toString());
 	}
 }

@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VideoCatalogoController">
+<TitledPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.VideoCatalogoController">
    <content>
-      <SplitPane dividerPositions="0.1725" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+      <SplitPane fx:id="mainPane" dividerPositions="0.1725" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
           <AnchorPane maxHeight="100.0" minHeight="100.0" minWidth="0.0" prefHeight="100.0" prefWidth="798.0">
                <children>
@@ -52,11 +52,19 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tbVideos" layoutY="7.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="columnVideo" prefWidth="75.0" text="C1" />
-                                                  </columns>
-                                                </TableView>
+                                                <ScrollPane fx:id="scrollFilmes" hbarPolicy="NEVER" layoutX="79.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <content>
+                                                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="589.0">
+                                                         <children>
+                                                            <TilePane fx:id="tileFilmes" hgap="15.0" layoutX="76.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <padding>
+                                                                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                               </padding>
+                                                            </TilePane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                  </content>
+                                                </ScrollPane>
                                              </children>
                                           </AnchorPane>
                                     </content>
@@ -70,7 +78,10 @@
                               </TabPane>
                            </children>
                         </AnchorPane>
-                      <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0" />
+                      <AnchorPane maxWidth="200.0" minHeight="0.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <Button fx:id="btnReproduzir" layoutX="91.0" layoutY="249.0" mnemonicParsing="false" text="Reproduzir" />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
